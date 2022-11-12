@@ -1,6 +1,6 @@
 package com.iamkamrul.apiresponse
 
-data class ReposListItemApiResponse(
+data class RepoItemApiResponse(
     val archive_url: String?,
     val archived: Boolean?,
     val assignees_url: String?,
@@ -52,8 +52,8 @@ data class ReposListItemApiResponse(
     val node_id: String?,
     val notifications_url: String?,
     val open_issues_count: Int?,
-    val owner: ReposListItemOwner?,
-    val permissions: ReposListItemPermissions?,
+    val owner: ReposItemOwner?,
+    val permissions: ReposItemPermissions?,
     val `private`: Boolean?,
     val pulls_url: String?,
     val pushed_at: String?,
@@ -77,7 +77,7 @@ data class ReposListItemApiResponse(
     val watchers_count: Int?
 )
 
-data class ReposListItemOwner(
+data class ReposItemOwner(
     val avatar_url: String?,
     val events_url: String?,
     val followers_url: String?,
@@ -98,7 +98,7 @@ data class ReposListItemOwner(
     val url: String?
 )
 
-data class ReposListItemPermissions(
+data class ReposItemPermissions(
     val admin: Boolean?,
     val pull: Boolean?,
     val push: Boolean?

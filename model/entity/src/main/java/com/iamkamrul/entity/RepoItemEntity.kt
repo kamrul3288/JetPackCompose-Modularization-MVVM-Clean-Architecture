@@ -1,6 +1,6 @@
 package com.iamkamrul.entity
 
-data class RepoListItemEntity(
+data class RepoItemEntity(
     val userAvatarUrl:String,
     val userName:String,
     val repoName:String,
