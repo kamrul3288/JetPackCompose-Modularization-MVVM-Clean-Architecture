@@ -61,6 +61,7 @@ dependencies {
     addDataModule()
     addDomainModule()
     addDiModule()
+    addFeatureModule()
 
     addAndroidComposeDependencies()
     addAndroLifeCycleDependencies()

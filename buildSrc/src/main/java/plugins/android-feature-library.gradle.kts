@@ -43,9 +43,13 @@ android{
 }
 
 dependencies{
+    addDiModule()
+    addDomainModule()
+
     addAndroidComposeDependencies()
     addAndroLifeCycleDependencies()
     addCoroutinesAndroidDependencies()
+    addCoilImageLoadingDependencies()
     addHiltDependencies()
     addAndroidTestsDependencies()
 }

@@ -3,6 +3,8 @@
     package="com.iamkamrul.modularization"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".JetpackApplication"
         android:allowBackup="true"

@@ -1,13 +1,4 @@
 @file:Suppress("UnstableApiUsage", "DEPRECATION")
-
-include(":data")
-
-
-include(":domain")
-
-
-
-
 rootProject.buildFileName = "build.gradle.kts.kts"
 pluginManagement {
     repositories {
@@ -49,3 +40,7 @@ include (":app")
 include(":di")
 include(":model:entity")
 include(":model:apiresponse")
+include(":data")
+include(":domain")
+
+include(":features:repolist")

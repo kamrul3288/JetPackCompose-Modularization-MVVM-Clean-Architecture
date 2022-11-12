@@ -1,6 +1,6 @@
 package dependencies
 
-import core.ModulesDep
+import core.*
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.kotlin.dsl.project
 
@@ -21,4 +21,10 @@ fun DependencyHandler.addApiResponseModule(configurationName:String = "implement
 
 fun DependencyHandler.addEntityModule(configurationName:String = "implementation"){
     add(configurationName, project(ModulesDep.entity))
+}
+
+fun DependencyHandler.addFeatureModule(){
+    featureModule.forEach {
+        add("implementation", project(it))
+    }
 }

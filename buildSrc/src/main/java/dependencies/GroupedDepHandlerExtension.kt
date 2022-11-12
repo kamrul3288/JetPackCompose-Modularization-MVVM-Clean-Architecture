@@ -22,6 +22,12 @@ fun DependencyHandler.addCoroutinesAndroidDependencies(){
     }
 }
 
+fun DependencyHandler.addCoilImageLoadingDependencies(){
+    coilImageLoadingDependencies.forEach {
+        add("implementation",it)
+    }
+}
+
 fun DependencyHandler.addNetworkDependencies(configurationName:String = "implementation"){
     networkDependencies.forEach {
         add(configurationName,it)

@@ -27,6 +27,7 @@ internal object Dependencies {
     const val kotlinCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutinesVersion}"
     const val leakcanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakcanaryVersion}"
     const val timber = "com.jakewharton.timber:timber:${Versions.timberVersion}"
+    const val coil = "io.coil-kt:coil-compose:${Versions.coilVersion}"
 
 
     const val jUnit = "androidx.compose.ui:ui-test-junit4:${Versions.jUnitVersion}"

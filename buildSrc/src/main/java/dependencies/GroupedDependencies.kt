@@ -22,6 +22,10 @@ internal val coroutinesAndroidDependencies = listOf(
     Dependencies.kotlinCoroutines,
 )
 
+internal val coilImageLoadingDependencies = listOf(
+    Dependencies.coil,
+)
+
 internal val networkDependencies = listOf(
     Dependencies.retrofit,
     Dependencies.retrofitGsonConverter,
