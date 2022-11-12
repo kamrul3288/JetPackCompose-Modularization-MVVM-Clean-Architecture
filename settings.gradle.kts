@@ -1,5 +1,8 @@
 @file:Suppress("UnstableApiUsage", "DEPRECATION")
 
+include(":domain")
+
+
 
 
 rootProject.buildFileName = "build.gradle.kts.kts"
