@@ -11,7 +11,7 @@ internal object Dependencies {
     const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycleVersion}"
     const val viewModelSaveState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.lifecycleVersion}"
     const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycleVersion}"
-    const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycleVersion}"
+    const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha01"
     const val lifecycleService = "androidx.lifecycle:lifecycle-service:${Versions.lifecycleVersion}"
 
     val hiltAndroid = "com.google.dagger:hilt-android:${Versions.hiltVersion}"

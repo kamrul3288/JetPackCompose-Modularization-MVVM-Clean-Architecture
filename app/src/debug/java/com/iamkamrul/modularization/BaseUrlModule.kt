@@ -11,6 +11,6 @@ import dagger.hilt.components.SingletonComponent
 class BaseUrlModule{
     @Provides
     @AppBaseUrl
-    fun provideBaseUrl():String = ""
+    fun provideBaseUrl():String = "https://api.github.com/"
 }
 

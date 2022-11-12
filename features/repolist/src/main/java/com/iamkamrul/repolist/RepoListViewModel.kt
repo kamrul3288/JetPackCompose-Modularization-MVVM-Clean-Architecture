@@ -7,6 +7,7 @@ import com.iamkamrul.domain.utils.Result
 import com.iamkamrul.entity.RepoItemEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,7 +17,7 @@ class RepoListViewModel @Inject constructor(
 ): ViewModel(){
     val action:(RepoListUiAction)->Unit
     private val _uiState = MutableStateFlow<RepoListUiState<*>>(RepoListUiState.Loading(false))
-    val uiState get() = _uiState
+    val uiState get() = _uiState.asStateFlow()
 
     init {
         action = {
@@ -29,7 +30,7 @@ class RepoListViewModel @Inject constructor(
 
     private fun fetchRepoList(){
         viewModelScope.launch {
-            repoListUseCase.execute(RepoListUseCase.Params(userName = "kamrul322")).collect{result->
+            repoListUseCase.execute(RepoListUseCase.Params(userName = "kamrul3288")).collect{result->
                 when(result){
                     is Result.Error -> _uiState.value = RepoListUiState.Error(result.message)
                     is Result.Loading -> _uiState.value = RepoListUiState.Loading(result.loading)
