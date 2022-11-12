@@ -37,3 +37,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "JetPackComposeModularization"
 include (":app")
+include(":di")
+
