@@ -13,6 +13,6 @@ android {
 
 dependencies {
     addApiResponseModule(configurationName = "api")
-    addDiModule(configurationName = "api")
+    addDiModule()
     addDomainModule()
 }

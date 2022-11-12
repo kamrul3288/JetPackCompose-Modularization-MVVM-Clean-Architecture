@@ -58,6 +58,10 @@ android {
 }
 
 dependencies {
+    addDataModule()
+    addDomainModule()
+    addDiModule()
+
     addAndroidComposeDependencies()
     addAndroLifeCycleDependencies()
     addCoroutinesAndroidDependencies()
