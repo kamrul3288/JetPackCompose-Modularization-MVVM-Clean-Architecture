@@ -1,4 +1,7 @@
 @file:Suppress("UnstableApiUsage", "DEPRECATION")
+
+
+
 rootProject.buildFileName = "build.gradle.kts.kts"
 pluginManagement {
     repositories {
@@ -38,4 +41,5 @@ dependencyResolutionManagement {
 rootProject.name = "JetPackComposeModularization"
 include (":app")
 include(":di")
-
+include(":model:entity")
+include(":model:apiresponse")
