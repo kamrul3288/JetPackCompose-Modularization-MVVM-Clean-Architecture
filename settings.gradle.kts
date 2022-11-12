@@ -1,5 +1,8 @@
 @file:Suppress("UnstableApiUsage", "DEPRECATION")
 
+include(":data")
+
+
 include(":domain")
 
 
