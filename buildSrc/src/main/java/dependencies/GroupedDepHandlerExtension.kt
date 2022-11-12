@@ -36,6 +36,7 @@ fun DependencyHandler.addNetworkDependencies(configurationName:String = "impleme
 
 fun DependencyHandler.addHiltDependencies() {
     add("implementation",Dependencies.hiltAndroid)
+    add("implementation",Dependencies.hiltNavCompose)
     add("kapt",Dependencies.hiltCompiler)
 }
 

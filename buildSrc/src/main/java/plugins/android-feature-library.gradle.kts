@@ -45,6 +45,7 @@ android{
 dependencies{
     addDiModule()
     addDomainModule()
+    addCommonModule()
 
     addAndroidComposeDependencies()
     addAndroLifeCycleDependencies()

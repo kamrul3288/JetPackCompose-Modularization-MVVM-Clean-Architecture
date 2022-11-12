@@ -62,6 +62,7 @@ dependencies {
     addDomainModule()
     addDiModule()
     addFeatureModule()
+    addCommonModule()
 
     addAndroidComposeDependencies()
     addAndroLifeCycleDependencies()

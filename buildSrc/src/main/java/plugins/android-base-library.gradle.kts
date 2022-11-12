@@ -1,7 +1,10 @@
 package plugins
+
+import dependencies.*
+
 plugins {
     id("com.android.library")
-    kotlin("android")
+    id ("org.jetbrains.kotlin.android")
     kotlin("kapt")
 }
 
@@ -37,4 +40,9 @@ android{
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+}
+dependencies{
+    addAndroidComposeDependencies()
+    addCoroutinesAndroidDependencies()
+    addAndroidTestsDependencies()
 }

@@ -9,6 +9,7 @@ internal object Versions {
     const val lifecycleVersion = "2.5.1"
     const val retrofitVersion = "2.9.0"
     val hiltVersion:String = System.getProperty("hiltVersion")
+    const val hiltNavigationComposeVersion = "1.0.0"
     const val timberVersion = "5.0.1"
     const val okhttp3Version = "4.10.0"
     const val gsonVersion = "2.9.1"

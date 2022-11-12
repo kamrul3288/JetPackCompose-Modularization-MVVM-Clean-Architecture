@@ -19,6 +19,10 @@ fun DependencyHandler.addApiResponseModule(configurationName:String = "implement
     add(configurationName, project(ModulesDep.apiResponse))
 }
 
+fun DependencyHandler.addCommonModule(){
+    add("implementation", project(ModulesDep.common))
+}
+
 fun DependencyHandler.addEntityModule(configurationName:String = "implementation"){
     add(configurationName, project(ModulesDep.entity))
 }

@@ -15,6 +15,7 @@ internal object Dependencies {
     const val lifecycleService = "androidx.lifecycle:lifecycle-service:${Versions.lifecycleVersion}"
 
     val hiltAndroid = "com.google.dagger:hilt-android:${Versions.hiltVersion}"
+    const val hiltNavCompose = "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigationComposeVersion}"
     val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}"
 
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofitVersion}"
