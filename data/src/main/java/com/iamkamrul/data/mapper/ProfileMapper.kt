@@ -1,4 +1,4 @@
-package com.iamkamrul.data.repoimpl
+package com.iamkamrul.data.mapper
 
 import com.iamkamrul.apiresponse.ProfileApiResponse
 import com.iamkamrul.data.utils.Mapper

@@ -8,12 +8,12 @@ import retrofit2.http.Path
 
 interface ApiService {
     @GET("/users/{username}/repos")
-    suspend fun fetchOwnerRepositoryList(
+    suspend fun fetchRepoList(
         @Path("username")username:String
     ): Response<List<RepoItemApiResponse>>
 
     @GET("/users/{username}")
-    suspend fun fetchUser(
+    suspend fun fetchProfile(
         @Path("username")username:String
     ):Response<ProfileApiResponse>
 }
