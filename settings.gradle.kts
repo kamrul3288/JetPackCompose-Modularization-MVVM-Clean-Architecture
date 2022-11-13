@@ -1,5 +1,8 @@
 @file:Suppress("UnstableApiUsage", "DEPRECATION")
 
+include(":features:profile")
+
+
 
 rootProject.buildFileName = "build.gradle.kts.kts"
 pluginManagement {
