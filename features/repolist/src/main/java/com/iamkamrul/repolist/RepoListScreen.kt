@@ -12,17 +12,21 @@ import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.rememberAsyncImagePainter
+import com.iamkamrul.common.compose.ApplicationAppbar
+import com.iamkamrul.common.compose.CircularProgressBar
+import com.iamkamrul.common.compose.NetworkErrorMessage
+import com.iamkamrul.common.compose.PaddingValuesBody
 import com.iamkamrul.entity.RepoItemEntity
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
@@ -31,30 +35,34 @@ fun RepoListScreen(
     viewModel:RepoListViewModel = hiltViewModel()
 ){
     Scaffold(
-        backgroundColor = Color.LightGray,
         topBar = {
-            RepoListTopAppBar()
+            ApplicationAppbar(title = "Repo List")
         },
     ){
         when(val result =  viewModel.uiState.collectAsStateWithLifecycle().value){
-            is RepoListUiState.Error -> ErrorMessage(message = result.message)
-            is RepoListUiState.Loading -> Progressbar()
+            is RepoListUiState.Error -> NetworkErrorMessage(message = result.message) {
+                viewModel.action(RepoListUiAction.FetchRepoList)
+            }
+            is RepoListUiState.Loading -> CircularProgressBar()
             is RepoListUiState.Success -> {
                 LazyColumn{
                     items(
                         items = result.repoList,
-                    ){
-                        RepoListItem(entity = it)
+                    ){repoItem->
+                        RepoListItem(entity = repoItem)
                     }
                 }
             }
         }
-        AppBody(paddingValues = it)
+        PaddingValuesBody(paddingValues = it)
     }
 }
 
+@Preview
 @Composable
-fun AppBody(paddingValues: PaddingValues){}
+fun PreviewRepoListItem(){
+    RepoListItem(entity = RepoItemEntity())
+}
 
 //RepoList Item
 @Composable
@@ -128,34 +136,4 @@ fun RepoListItem(
     }
 }
 
-//Repo List Appbar
-@Composable
-fun RepoListTopAppBar(){
-    TopAppBar(
-        title = {
-            Text(text = "RepoList")
-        }
-    )
-}
 
-//Progressbar
-@Composable
-fun Progressbar(){
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxSize()
-    ) {
-        CircularProgressIndicator()
-    }
-}
-
-//error
-@Composable
-fun  ErrorMessage(message:String){
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Text(text = message)
-    }
-}
