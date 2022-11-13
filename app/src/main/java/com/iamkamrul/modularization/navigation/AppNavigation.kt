@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.iamkamrul.common.utils.NavRoute
+import com.iamkamrul.profile.ProfileScreen
 import com.iamkamrul.repolist.RepoListScreen
 
 @Composable
@@ -13,11 +14,17 @@ fun AppNavigation(){
     NavHost(navController = navController, startDestination = NavRoute.repoListScreen ){
 
         composable(NavRoute.repoListScreen){
-            RepoListScreen()
+            RepoListScreen{
+                navController.navigate(NavRoute.profileScreen)
+            }
         }
 
         composable(NavRoute.profileScreen){
-
+            ProfileScreen(
+                onClickBack = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }

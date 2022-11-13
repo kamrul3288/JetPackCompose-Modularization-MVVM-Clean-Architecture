@@ -9,5 +9,6 @@ object ModulesDep {
     const val common = ":common"
 
     const val repoList = ":features:repolist"
+    const val profile = ":features:profile"
 }
 

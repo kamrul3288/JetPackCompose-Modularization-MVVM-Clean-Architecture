@@ -1,9 +1,5 @@
 @file:Suppress("UnstableApiUsage", "DEPRECATION")
 
-include(":features:profile")
-
-
-
 rootProject.buildFileName = "build.gradle.kts.kts"
 pluginManagement {
     repositories {
@@ -50,3 +46,5 @@ include(":domain")
 include(":common")
 
 include(":features:repolist")
+include(":features:profile")
+

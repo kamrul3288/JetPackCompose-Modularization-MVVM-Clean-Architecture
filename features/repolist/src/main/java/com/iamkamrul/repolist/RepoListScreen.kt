@@ -1,6 +1,7 @@
 package com.iamkamrul.repolist
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -32,7 +33,8 @@ import com.iamkamrul.entity.RepoItemEntity
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun RepoListScreen(
-    viewModel:RepoListViewModel = hiltViewModel()
+    viewModel:RepoListViewModel = hiltViewModel(),
+    onItemClick:()->Unit
 ){
     Scaffold(
         topBar = {
@@ -49,7 +51,7 @@ fun RepoListScreen(
                     items(
                         items = result.repoList,
                     ){repoItem->
-                        RepoListItem(entity = repoItem)
+                        RepoListItem(entity = repoItem, onItemClick = onItemClick)
                     }
                 }
             }
@@ -61,17 +63,22 @@ fun RepoListScreen(
 @Preview
 @Composable
 fun PreviewRepoListItem(){
-    RepoListItem(entity = RepoItemEntity())
+    RepoListItem(entity = RepoItemEntity()){
+
+    }
 }
 
 //RepoList Item
 @Composable
 fun RepoListItem(
     modifier: Modifier = Modifier,
-    entity: RepoItemEntity
+    entity: RepoItemEntity,
+    onItemClick:()->Unit
 ){
     Card(
-        modifier = modifier.padding(bottom = 1.dp),
+        modifier = modifier.padding(bottom = 1.dp).clickable {
+           onItemClick()
+        },
         elevation = 1.dp,
         shape = RoundedCornerShape(size = 0.dp)
     ) {
