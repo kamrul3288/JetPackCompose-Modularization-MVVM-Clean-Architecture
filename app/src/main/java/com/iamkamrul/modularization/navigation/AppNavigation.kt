@@ -7,7 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.iamkamrul.common.utils.NavRoute
-import com.iamkamrul.profile.ProfileScreen
+import com.iamkamrul.profile.ProfileRoute
+import com.iamkamrul.profile.ProfileViewModel
 import com.iamkamrul.repolist.RepoListRoute
 import com.iamkamrul.repolist.RepoListViewModel
 
@@ -25,10 +26,10 @@ fun AppNavigation(
         }
 
         composable(NavRoute.profileScreen){
-            ProfileScreen(
-                onClickBack = {
-                    navController.popBackStack()
-                }
+            val viewModel:ProfileViewModel = hiltViewModel()
+            ProfileRoute(
+                viewModel = viewModel,
+                onPopBack = {navController.popBackStack()}
             )
         }
     }

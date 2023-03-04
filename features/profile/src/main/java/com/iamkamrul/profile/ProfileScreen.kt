@@ -13,46 +13,74 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.rememberAsyncImagePainter
 import com.iamkamrul.common.compose.ApplicationAppbar
 import com.iamkamrul.common.compose.CircularProgressBar
 import com.iamkamrul.common.compose.NetworkErrorMessage
-import com.iamkamrul.common.compose.PaddingValuesBody
 import com.iamkamrul.entity.ProfileEntity
 
 @Composable
 fun ProfileScreen(
-    onClickBack:()->Unit,
-    viewModel: ProfileScreenViewModel = hiltViewModel()
+    uiState: ProfileUiState,
+    onRefreshProfile:()->Unit,
+    onPopBack:()->Unit
+){
+    ProfileScreen(
+        uiState = uiState,
+        success = {profileEntity, modifier ->
+           ProfileContentView(entity = profileEntity, modifier = modifier)
+        },
+        error = {message ->
+            NetworkErrorMessage(
+                message = message,
+                onClickRefresh = onRefreshProfile
+            )
+        },
+        onPopBack = onPopBack
+    )
+}
+
+@Composable
+private fun ProfileScreen(
+    uiState: ProfileUiState,
+    success: @Composable (profileEntity: ProfileEntity, modifier:Modifier) -> Unit,
+    error: @Composable (message: String) -> Unit,
+    onPopBack:()->Unit
 ){
     Scaffold(topBar = {
-        ApplicationAppbar(title = "Profile", onClickBack = onClickBack)
+        ApplicationAppbar(
+            title = "Profile",
+            onClickBack = onPopBack
+        )
     }) {
-        when(val result =  viewModel.uiState.collectAsStateWithLifecycle().value){
-            is ProfileUiState.Error -> NetworkErrorMessage(message = result.message) {
-                viewModel.action(ProfileUiAction.FetchProfile)
+        val modifier = Modifier.padding(it)
+        FullScreenLoading(
+            isLoading = uiState.isLoading,
+            loadingContent = { CircularProgressBar()},
+            content = {
+                when(uiState){
+                    is ProfileUiState.Error -> error(uiState.error)
+                    is ProfileUiState.Success -> success(uiState.profileEntity,modifier)
+                }
             }
-            is ProfileUiState.Loading -> CircularProgressBar()
-            is ProfileUiState.Success -> ProfileContentView(entity = result.profile)
-        }
-
-        PaddingValuesBody(paddingValues = it)
+        )
     }
 }
 
-@Preview
 @Composable
-fun PreviewProfileContentView(){
-    ProfileContentView(entity = ProfileEntity())
+private fun FullScreenLoading(
+    isLoading:Boolean,
+    loadingContent: @Composable () -> Unit,
+    content: @Composable () -> Unit,
+){
+    if (isLoading) loadingContent()
+    else content()
 }
 
 @Composable
-fun ProfileContentView(
+private fun ProfileContentView(
     modifier: Modifier = Modifier,
     entity: ProfileEntity
 ){
