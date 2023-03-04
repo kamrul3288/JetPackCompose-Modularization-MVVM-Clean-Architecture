@@ -6,8 +6,7 @@ import com.iamkamrul.domain.usecase.RepoListUseCase
 import com.iamkamrul.domain.utils.Result
 import com.iamkamrul.entity.RepoItemEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,8 +15,15 @@ class RepoListViewModel @Inject constructor(
     private val repoListUseCase: RepoListUseCase
 ): ViewModel(){
     val action:(RepoListUiAction)->Unit
-    private val _uiState = MutableStateFlow<RepoListUiState<*>>(RepoListUiState.Loading(false))
-    val uiState get() = _uiState.asStateFlow()
+
+    private val viewModelState = MutableStateFlow(RepoListViewModelState(isLoading = true))
+    val uiState = viewModelState
+        .map(RepoListViewModelState::toUiState)
+        .stateIn(
+            viewModelScope,
+            SharingStarted.Eagerly,
+            viewModelState.value.toUiState()
+        )
 
     init {
         action = {
@@ -30,11 +36,17 @@ class RepoListViewModel @Inject constructor(
 
     private fun fetchRepoList(){
         viewModelScope.launch {
-            repoListUseCase.execute(RepoListUseCase.Params(userName = "kamrul3288")).collect{result->
-                when(result){
-                    is Result.Error -> _uiState.value = RepoListUiState.Error(result.message)
-                    is Result.Loading -> _uiState.value = RepoListUiState.Loading(result.loading)
-                    is Result.Success -> _uiState.value = RepoListUiState.Success(result.data)
+            repoListUseCase.execute(RepoListUseCase.Params(userName = "kamrul3288")).collect{response->
+                when(response){
+                    is Result.Error -> viewModelState.update {
+                        it.copy(error = response.message)
+                    }
+                    is Result.Loading -> viewModelState.update {
+                        it.copy(error = "", isLoading = response.loading)
+                    }
+                    is Result.Success -> viewModelState.update {
+                        it.copy(repoList = response.data)
+                    }
                 }
             }
         }
@@ -42,10 +54,30 @@ class RepoListViewModel @Inject constructor(
 
 }
 
-sealed class RepoListUiState<out R>{
-    data class Loading(val isLoading:Boolean):RepoListUiState<Loading>()
-    data class Success(val repoList:List<RepoItemEntity>):RepoListUiState<Success>()
-    data class Error(val message:String):RepoListUiState<Error>()
+private data class RepoListViewModelState(
+    val isLoading:Boolean = false,
+    val error:String = "",
+    val repoList:List<RepoItemEntity> = listOf()
+){
+    fun toUiState():RepoListUiState =
+        if (repoList.isEmpty()) RepoListUiState.RepoListEmpty(isLoading = isLoading, error = error)
+        else RepoListUiState.HasRepoList(isLoading = isLoading, error = error, repoList = repoList)
+}
+
+sealed interface RepoListUiState{
+    val isLoading:Boolean
+    val error:String
+
+    data class HasRepoList(
+        val repoList:List<RepoItemEntity>,
+        override val isLoading: Boolean,
+        override val error: String
+    ):RepoListUiState
+
+    data class RepoListEmpty(
+        override val isLoading: Boolean,
+        override val error: String
+    ):RepoListUiState
 }
 
 sealed class RepoListUiAction{

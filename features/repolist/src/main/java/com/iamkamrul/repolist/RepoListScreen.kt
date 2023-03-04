@@ -29,6 +29,7 @@ import com.iamkamrul.common.compose.NetworkErrorMessage
 import com.iamkamrul.common.compose.PaddingValuesBody
 import com.iamkamrul.entity.RepoItemEntity
 
+/*
 @Composable
 fun RepoListScreen(
     viewModel:RepoListViewModel = hiltViewModel(),
@@ -140,5 +141,6 @@ fun RepoListItem(
         }
     }
 }
+*/
 
 
