@@ -9,7 +9,6 @@ import androidx.navigation.compose.rememberNavController
 import com.iamkamrul.common.utils.NavRoute
 import com.iamkamrul.profile.ProfileScreen
 import com.iamkamrul.repolist.RepoListRoute
-import com.iamkamrul.repolist.RepoListScreen
 import com.iamkamrul.repolist.RepoListViewModel
 
 @Composable
@@ -20,7 +19,9 @@ fun AppNavigation(
 
         composable(NavRoute.repoListScreen){
             val viewModel:RepoListViewModel = hiltViewModel()
-            RepoListRoute(viewModel = viewModel)
+            RepoListRoute(viewModel = viewModel){
+                navController.navigate(NavRoute.profileScreen)
+            }
         }
 
         composable(NavRoute.profileScreen){
