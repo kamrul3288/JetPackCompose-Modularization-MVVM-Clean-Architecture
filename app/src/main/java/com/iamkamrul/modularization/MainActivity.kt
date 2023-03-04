@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
 import com.iamkamrul.modularization.navigation.AppNavigation
 import com.iamkamrul.modularization.ui.theme.JetPackComposeModularizationTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,12 +18,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JetPackComposeModularizationTheme {
-                // A surface container using the 'background' color from the theme
+                val navController = rememberNavController()
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    AppNavigation()
+                    AppNavigation(
+                        navController = navController
+                    )
                 }
             }
         }

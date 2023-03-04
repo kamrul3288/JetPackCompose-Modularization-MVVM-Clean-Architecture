@@ -1,6 +1,7 @@
 package com.iamkamrul.modularization.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -9,8 +10,9 @@ import com.iamkamrul.profile.ProfileScreen
 import com.iamkamrul.repolist.RepoListScreen
 
 @Composable
-fun AppNavigation(){
-    val navController = rememberNavController()
+fun AppNavigation(
+    navController: NavHostController = rememberNavController()
+){
     NavHost(navController = navController, startDestination = NavRoute.repoListScreen ){
 
         composable(NavRoute.repoListScreen){
