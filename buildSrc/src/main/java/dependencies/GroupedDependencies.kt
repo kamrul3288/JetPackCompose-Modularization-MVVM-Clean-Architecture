@@ -13,7 +13,7 @@ internal val androidComposeDependencies = listOf(
 internal val androidxLifeCycleDependencies = listOf(
     Dependencies.viewModel,
     Dependencies.liveData,
-    Dependencies.lifecycleRuntime,
+    Dependencies.runtimeCompose,
     Dependencies.viewModelSaveState,
     Dependencies.lifecycleService,
 )

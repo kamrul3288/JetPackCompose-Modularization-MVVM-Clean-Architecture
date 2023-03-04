@@ -1,6 +1,4 @@
 @file:Suppress("UnstableApiUsage", "DEPRECATION")
-
-rootProject.buildFileName = "build.gradle.kts.kts"
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -18,6 +16,7 @@ pluginManagement {
                 id ("com.android.application") version(extra.properties["androidGradlePluginVersion"].toString())
                 id ("com.android.library") version(extra.properties["androidGradlePluginVersion"].toString())
                 id ("org.jetbrains.kotlin.android") version(extra.properties["kotlinVersion"].toString())
+                id ("org.jetbrains.kotlin.jvm") version(extra.properties["kotlinVersion"].toString())
                 id ("com.google.dagger.hilt.android") version(extra.properties["hiltVersion"].toString())
             }
         }

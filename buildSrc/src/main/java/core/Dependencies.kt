@@ -11,7 +11,7 @@ internal object Dependencies {
     const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycleVersion}"
     const val viewModelSaveState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.lifecycleVersion}"
     const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycleVersion}"
-    const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha01"
+    const val runtimeCompose = "androidx.lifecycle:lifecycle-runtime-compose:${Versions.runtimeComposeVersion}"
     const val lifecycleService = "androidx.lifecycle:lifecycle-service:${Versions.lifecycleVersion}"
 
     val hiltAndroid = "com.google.dagger:hilt-android:${Versions.hiltVersion}"
@@ -31,7 +31,7 @@ internal object Dependencies {
     const val coil = "io.coil-kt:coil-compose:${Versions.coilVersion}"
 
 
-    const val jUnit = "androidx.compose.ui:ui-test-junit4:${Versions.jUnitVersion}"
+    const val jUnit = "androidx.compose.ui:ui-test-junit4:${Versions.composeVersion}"
     const val jUnitExt = "androidx.test.ext:junit:${Versions.jUnitExtVersion}"
     const val jUnitTestUi = "androidx.compose.ui:ui-test-junit4:${Versions.composeVersion}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espressoCoreVersion}"

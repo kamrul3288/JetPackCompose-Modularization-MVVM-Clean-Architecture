@@ -21,7 +21,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.rememberAsyncImagePainter
 import com.iamkamrul.common.compose.ApplicationAppbar
@@ -30,7 +29,6 @@ import com.iamkamrul.common.compose.NetworkErrorMessage
 import com.iamkamrul.common.compose.PaddingValuesBody
 import com.iamkamrul.entity.RepoItemEntity
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun RepoListScreen(
     viewModel:RepoListViewModel = hiltViewModel(),

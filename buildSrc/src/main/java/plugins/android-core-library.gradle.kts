@@ -12,7 +12,6 @@ android{
     compileSdk = AppConfig.compileSdkVersion
     defaultConfig {
         minSdk = AppConfig.minSdkVersion
-        targetSdk = AppConfig.targetSdkVersion
         testInstrumentationRunner = AppConfig.testRunner
         consumerProguardFiles("consumer-rules.pro")
         vectorDrawables{
