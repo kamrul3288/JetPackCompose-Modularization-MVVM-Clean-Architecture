@@ -23,9 +23,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.iamkamrul.common.compose.ApplicationAppbar
-import com.iamkamrul.common.compose.CircularProgressBar
-import com.iamkamrul.common.compose.NetworkErrorMessage
+import com.iamkamrul.ui.component.CircularProgressBar
+import com.iamkamrul.ui.component.NetworkErrorMessage
 import com.iamkamrul.entity.RepoItemEntity
 
 @Composable
@@ -54,12 +53,12 @@ private fun RepoListScreen(
     onRefreshRepoList:()->Unit
 ){
     Scaffold(
-        topBar = { ApplicationAppbar(title = "Repo List") },
+        topBar = { com.iamkamrul.designsystem.component.ApplicationAppbar(title = "Repo List") },
     ) {
         val modifier = Modifier.padding(it)
         FullScreenLoading(
             isLoading = uiState.isLoading,
-            loadingContent = { CircularProgressBar()},
+            loadingContent = { CircularProgressBar() },
             content = {
                 when(uiState){
 

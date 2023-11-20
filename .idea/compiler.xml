@@ -5,6 +5,9 @@
       <module name="JetPackComposeModularization.buildSrc" target="17" />
       <module name="JetPackComposeModularization.buildSrc.main" target="17" />
       <module name="JetPackComposeModularization.buildSrc.test" target="17" />
+      <module name="JetPackComposeModularization.data" target="17" />
+      <module name="JetPackComposeModularization.di" target="17" />
+      <module name="JetPackComposeModularization.domain" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>

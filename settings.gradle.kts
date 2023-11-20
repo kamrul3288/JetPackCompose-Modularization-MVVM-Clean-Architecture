@@ -18,13 +18,16 @@ dependencyResolutionManagement {
 rootProject.name = "JetPackComposeModularization"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include (":app")
-include(":di")
-include(":domain")
-
+include(":core:di")
+include(":core:domain")
+include(":core:data")
 include(":model:entity")
 include(":model:apiresponse")
-include(":data")
+
 include(":common")
+include(":core:designsystem")
+include(":core:ui")
+
 include(":features:repolist")
 include(":features:profile")
 

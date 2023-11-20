@@ -45,11 +45,12 @@ android {
     }
 }
 dependencies {
-
-    implementation(projects.di)
-    implementation(projects.domain)
-    implementation(projects.data)
+    implementation(projects.core.di)
+    implementation(projects.core.domain)
+    implementation(projects.core.data)
     implementation(projects.common)
+    implementation(projects.core.ui)
+    implementation(projects.core.designsystem)
 
     implementation(projects.features.repolist)
     implementation(projects.features.profile)

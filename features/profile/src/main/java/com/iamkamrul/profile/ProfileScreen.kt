@@ -17,9 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import com.iamkamrul.common.compose.ApplicationAppbar
-import com.iamkamrul.common.compose.CircularProgressBar
-import com.iamkamrul.common.compose.NetworkErrorMessage
+import com.iamkamrul.ui.component.CircularProgressBar
+import com.iamkamrul.ui.component.NetworkErrorMessage
 import com.iamkamrul.entity.ProfileEntity
 
 @Composable
@@ -51,7 +50,7 @@ private fun ProfileScreen(
     onPopBack:()->Unit
 ){
     Scaffold(topBar = {
-        ApplicationAppbar(
+        com.iamkamrul.designsystem.component.ApplicationAppbar(
             title = "Profile",
             onClickBack = onPopBack
         )
@@ -59,7 +58,7 @@ private fun ProfileScreen(
         val modifier = Modifier.padding(it)
         FullScreenLoading(
             isLoading = uiState.isLoading,
-            loadingContent = { CircularProgressBar()},
+            loadingContent = { CircularProgressBar() },
             content = {
                 when(uiState){
                     is ProfileUiState.Error -> error(uiState.error)

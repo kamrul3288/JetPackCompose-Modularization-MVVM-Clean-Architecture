@@ -9,7 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.iamkamrul.modularization.navigation.AppNavigation
-import com.iamkamrul.modularization.ui.theme.JetPackComposeModularizationTheme
+import com.iamkamrul.designsystem.theme.JetPackComposeModularizationTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
