@@ -1,22 +1,18 @@
-import dependencies.*
-
-
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id ("com.android.application")
-    id ("org.jetbrains.kotlin.android")
-    kotlin("kapt")
-    id ("dagger.hilt.android.plugin")
+    alias(libs.plugins.iamkamrul.android.application)
+    alias(libs.plugins.iamkamrul.android.hilt)
+    alias(libs.plugins.iamkamrul.android.application.compose)
 }
 
 android {
-    compileSdk = AppConfig.compileSdkVersion
+    namespace = "com.iamkamrul.modularization"
     defaultConfig {
-        applicationId = AppConfig.applicationId
-        minSdk = AppConfig.minSdkVersion
-        targetSdk = AppConfig.targetSdkVersion
-        versionCode = AppConfig.versionCode
-        versionName = AppConfig.versionName
-        vectorDrawables{
+        applicationId = "com.iamkamrul.compose"
+        versionCode = 1
+        versionName = "1.0.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
             useSupportLibrary = true
         }
     }
@@ -25,50 +21,50 @@ android {
         debug {
             isMinifyEnabled = false
             isShrinkResources = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
         debug {
             isMinifyEnabled = false
             isShrinkResources = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
     buildFeatures{
-        compose = true
+        buildConfig = true
     }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = AppConfig.kotlinCompilerExtensionVersion
-    }
-
-    packagingOptions {
+    packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
 }
-
 dependencies {
-    addDataModule()
-    addDomainModule()
-    addDiModule()
-    addFeatureModule()
-    addCommonModule()
 
-    addAndroidComposeDependencies()
-    addAndroLifeCycleDependencies()
-    addCoroutinesAndroidDependencies()
-    addHiltDependencies()
-    addNetworkDependencies()
-    addLeakcanaryDependencies()
-    addAndroidTestsDependencies()
+    implementation(projects.di)
+    implementation(projects.domain)
+    implementation(projects.data)
+    implementation(projects.common)
+
+    implementation(projects.features.repolist)
+    implementation(projects.features.profile)
+
+    implementation(libs.androidx.lifecycle.runtimeCompose)
+    implementation(libs.androidx.lifecycle.viewModelCompose)
+    implementation(libs.androidx.compose.hilt.navigation)
+    implementation(libs.androidx.compose.activity)
+    implementation(libs.androidx.compose.navigation)
+
+    implementation(libs.log.timber)
+
+    testImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.extjunit)
+    androidTestImplementation(libs.test.espresso)
+    androidTestImplementation(libs.test.compose.ui.junit)
+    debugImplementation(libs.androidx.compose.ui.manifest)
 }

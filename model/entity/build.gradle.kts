@@ -1,9 +1,5 @@
+@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    id("java-library")
-    id("org.jetbrains.kotlin.jvm")
+    alias(libs.plugins.iamkamrul.jvm.library)
 }
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
+true

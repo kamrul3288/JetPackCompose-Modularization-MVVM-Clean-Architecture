@@ -1,7 +1,7 @@
-import dependencies.addEntityModule
-
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-   plugins.`android-core-library`
+    alias(libs.plugins.iamkamrul.android.library)
+    alias(libs.plugins.iamkamrul.android.hilt)
 }
 
 android {
@@ -9,5 +9,6 @@ android {
 }
 
 dependencies {
-    addEntityModule(configurationName = "api")
+    api(projects.model.entity)
+    implementation(libs.androidx.corektx)
 }
