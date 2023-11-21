@@ -1,12 +1,9 @@
 package com.iamkamrul.profile
-
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
+import com.iamkamrul.designsystem.component.ScaffoldTopAppbar
 import com.iamkamrul.ui.component.CircularProgressBar
 import com.iamkamrul.ui.component.NetworkErrorMessage
 import com.iamkamrul.entity.ProfileEntity
@@ -49,12 +47,7 @@ private fun ProfileScreen(
     error: @Composable (message: String) -> Unit,
     onPopBack:()->Unit
 ){
-    Scaffold(topBar = {
-        com.iamkamrul.designsystem.component.ApplicationAppbar(
-            title = "Profile",
-            onClickBack = onPopBack
-        )
-    }) {
+    ScaffoldTopAppbar(title = "Profile", onNavigationIconClick = onPopBack) {
         val modifier = Modifier.padding(it)
         FullScreenLoading(
             isLoading = uiState.isLoading,
@@ -67,6 +60,7 @@ private fun ProfileScreen(
             }
         )
     }
+
 }
 
 @Composable
