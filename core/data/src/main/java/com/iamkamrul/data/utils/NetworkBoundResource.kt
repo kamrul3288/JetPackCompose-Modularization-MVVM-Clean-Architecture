@@ -10,7 +10,6 @@ import retrofit2.Response
 import java.io.IOException
 import java.net.SocketTimeoutException
 import com.iamkamrul.domain.utils.Result
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -23,9 +22,8 @@ class NetworkBoundResource @Inject constructor(){
     suspend fun<ResultType> downloadData(api : suspend () -> Response<ResultType>): Flow<Result<ResultType>> {
         return withContext(ioDispatcher) {
             flow {
-                emit(Result.Loading(true))
+                emit(Result.Loading)
                 val response:Response<ResultType> = api()
-                emit(Result.Loading(false))
                 if (response.isSuccessful){
                     response.body()?.let {
                         emit(Result.Success(data = it))
@@ -36,8 +34,6 @@ class NetworkBoundResource @Inject constructor(){
 
             }.catch { error->
                 Timber.e(error.localizedMessage)
-                emit(Result.Loading(false))
-                delay(5)
                 emit(Result.Error(message = message(error), code = code(error)))
             }
         }

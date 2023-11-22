@@ -8,5 +8,6 @@ android {
     namespace = "com.iamkamrul.di"
 }
 dependencies {
-    implementation(libs.log.timber)
+    api(libs.log.timber)
+    api(libs.bundles.network)
 }

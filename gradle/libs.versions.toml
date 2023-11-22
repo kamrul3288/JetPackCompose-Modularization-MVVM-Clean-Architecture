@@ -66,8 +66,7 @@ espresso = "3.5.1"
 org-jetbrains-kotlin-android = "1.9.0"
 
 [bundles]
-retrofit = ["retrofit2.core","retrofit2.rx3adapter","retrofit2.gsonconverter","gson"]
-okHttp = ["okhHttp3.core","okhHttp3.interceptor"]
+network = ["retrofit2.core","retrofit2.rx3adapter","retrofit2.gsonconverter","gson","okhHttp3.core","okhHttp3.interceptor","kotlinx-coroutines-android"]
 rxJava3 = ["rxjava3.core","rxjava3.android"]
 
 [libraries]

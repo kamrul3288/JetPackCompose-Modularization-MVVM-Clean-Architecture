@@ -14,23 +14,10 @@ import javax.inject.Inject
 class RepoListViewModel @Inject constructor(
     private val repoListUseCase: RepoListUseCase
 ): ViewModel(){
-    val action:(RepoListUiAction)->Unit
-
-    private val viewModelState = MutableStateFlow(RepoListViewModelState(isLoading = true))
-    val uiState = viewModelState
-        .map(RepoListViewModelState::toUiState)
-        .stateIn(
-            viewModelScope,
-            SharingStarted.Eagerly,
-            viewModelState.value.toUiState()
-        )
+    private val _repoListUiState = MutableStateFlow<RepoListUiState>(RepoListUiState.Loading)
+    val repoListUiState get() = _repoListUiState.asStateFlow()
 
     init {
-        action = {
-            when(it){
-                RepoListUiAction.FetchRepoList -> fetchRepoList()
-            }
-        }
         fetchRepoList()
     }
 
@@ -38,48 +25,34 @@ class RepoListViewModel @Inject constructor(
         viewModelScope.launch {
             repoListUseCase.execute(RepoListUseCase.Params(userName = "kamrul3288")).collect{response->
                 when(response){
-                    is Result.Error -> viewModelState.update {
-                        it.copy(error = response.message)
-                    }
-                    is Result.Loading -> viewModelState.update {
-                        it.copy(error = "", isLoading = response.loading)
-                    }
-                    is Result.Success -> viewModelState.update {
-                        it.copy(repoList = response.data)
+                    is Result.Error -> _repoListUiState.value  = RepoListUiState.Error(response.message)
+                    is Result.Loading -> _repoListUiState.value  = RepoListUiState.Loading
+                    is Result.Success ->{
+                        if (response.data.isEmpty()){
+                            _repoListUiState.value = RepoListUiState.RepoListEmpty
+                            return@collect
+                        }
+                        _repoListUiState.value = RepoListUiState.HasRepoList(response.data)
                     }
                 }
             }
         }
     }
 
-}
-
-private data class RepoListViewModelState(
-    val isLoading:Boolean = false,
-    val error:String = "",
-    val repoList:List<RepoItemEntity> = listOf()
-){
-    fun toUiState():RepoListUiState =
-        if (repoList.isEmpty()) RepoListUiState.RepoListEmpty(isLoading = isLoading, error = error)
-        else RepoListUiState.HasRepoList(isLoading = isLoading, error = error, repoList = repoList)
+    fun handleAction(action: RepoListUiAction){
+        when(action){
+            RepoListUiAction.FetchRepoList -> fetchRepoList()
+        }
+    }
 }
 
 sealed interface RepoListUiState{
-    val isLoading:Boolean
-    val error:String
-
-    data class HasRepoList(
-        val repoList:List<RepoItemEntity>,
-        override val isLoading: Boolean,
-        override val error: String
-    ):RepoListUiState
-
-    data class RepoListEmpty(
-        override val isLoading: Boolean,
-        override val error: String
-    ):RepoListUiState
+    data object Loading:RepoListUiState
+    data class HasRepoList(val repoList:List<RepoItemEntity>):RepoListUiState
+    data object RepoListEmpty:RepoListUiState
+    data class Error(val message:String):RepoListUiState
 }
 
-sealed class RepoListUiAction{
-    object FetchRepoList:RepoListUiAction()
+sealed interface RepoListUiAction{
+    data object FetchRepoList:RepoListUiAction
 }

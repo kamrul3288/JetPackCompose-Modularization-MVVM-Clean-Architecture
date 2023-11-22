@@ -11,4 +11,5 @@ android {
 dependencies {
     api(projects.model.entity)
     implementation(libs.androidx.corektx)
+    implementation(libs.kotlinx.coroutines.android)
 }

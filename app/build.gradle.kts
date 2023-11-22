@@ -53,15 +53,13 @@ dependencies {
     implementation(projects.core.designsystem)
 
     implementation(projects.features.repolist)
-    implementation(projects.features.profile)
+    //implementation(projects.features.profile)
 
-    implementation(libs.androidx.lifecycle.runtimeCompose)
-    implementation(libs.androidx.lifecycle.viewModelCompose)
-    implementation(libs.androidx.compose.hilt.navigation)
     implementation(libs.androidx.compose.activity)
     implementation(libs.androidx.compose.navigation)
-
-    implementation(libs.log.timber)
+    implementation(libs.androidx.compose.hilt.navigation)
+    implementation(libs.androidx.lifecycle.runtimeCompose)
+    implementation(libs.androidx.lifecycle.viewModelCompose)
 
     testImplementation(libs.test.junit)
     androidTestImplementation(libs.test.extjunit)

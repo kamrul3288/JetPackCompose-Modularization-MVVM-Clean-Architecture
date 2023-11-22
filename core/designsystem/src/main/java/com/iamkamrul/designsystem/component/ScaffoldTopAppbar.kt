@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
+import com.iamkamrul.designsystem.theme.color
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -42,10 +43,10 @@ fun ScaffoldTopAppbar(
                         Text(text = title)
                     },
                     colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                       /* containerColor = MaterialTheme.color.topAppBar,
+                        containerColor = MaterialTheme.color.topAppBar,
                         navigationIconContentColor = MaterialTheme.color.black,
                         titleContentColor = MaterialTheme.color.black,
-                        actionIconContentColor = MaterialTheme.color.black,*/
+                        actionIconContentColor = MaterialTheme.color.black,
                     ),
                     navigationIcon = {
                         IconButton(onClick = onNavigationIconClick) {
@@ -79,16 +80,18 @@ fun ScaffoldTopAppbar(
         containerColor = containerColor,
         contentColor = contentColor,
         topBar = {
-            Surface(shadowElevation = 1.dp) {
+            Surface(
+                shadowElevation = 2.dp
+            ) {
                 CenterAlignedTopAppBar(
                     title = {
                         Text(text = title)
                     },
                     colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                      /*  containerColor = MaterialTheme.color.topAppBar,
+                        containerColor = MaterialTheme.color.topAppBar,
                         navigationIconContentColor = MaterialTheme.color.black,
                         titleContentColor = MaterialTheme.color.black,
-                        actionIconContentColor = MaterialTheme.color.black,*/
+                        actionIconContentColor = MaterialTheme.color.black,
                     )
                 )
             }

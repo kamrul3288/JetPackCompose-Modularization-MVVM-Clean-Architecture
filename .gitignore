@@ -82,3 +82,7 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
+/.idea/compiler.xml
+/.idea/deploymentTargetDropDown.xml
+/.idea/gradle.xml
+#git rm --cached .idea/gradle.xml
