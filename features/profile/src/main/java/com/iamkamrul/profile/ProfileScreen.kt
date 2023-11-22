@@ -4,8 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -13,80 +15,66 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.rememberAsyncImagePainter
 import com.iamkamrul.designsystem.component.ScaffoldTopAppbar
-import com.iamkamrul.ui.component.CircularProgressBar
 import com.iamkamrul.ui.component.NetworkErrorMessage
 import com.iamkamrul.entity.ProfileEntity
 
 @Composable
-fun ProfileScreen(
-    uiState: ProfileUiState,
-    onRefreshProfile:()->Unit,
-    onPopBack:()->Unit
+internal fun ProfileScreenRoute(
+    viewModel:ProfileViewModel = hiltViewModel(),
+    onBackBtnClick:()->Unit
 ){
+    val profileUiState by viewModel.profileUiState.collectAsStateWithLifecycle()
     ProfileScreen(
-        uiState = uiState,
-        success = {profileEntity, modifier ->
-           ProfileContentView(entity = profileEntity, modifier = modifier)
-        },
-        error = {message ->
-            NetworkErrorMessage(
-                message = message,
-                onClickRefresh = onRefreshProfile
-            )
-        },
-        onPopBack = onPopBack
+        profileUiState = profileUiState,
+        onRefreshProfile = viewModel::handleAction,
+        onBackBtnClick = onBackBtnClick
     )
 }
 
 @Composable
 private fun ProfileScreen(
-    uiState: ProfileUiState,
-    success: @Composable (profileEntity: ProfileEntity, modifier:Modifier) -> Unit,
-    error: @Composable (message: String) -> Unit,
-    onPopBack:()->Unit
+    profileUiState: ProfileUiState,
+    onRefreshProfile:(ProfileUiAction)->Unit,
+    onBackBtnClick:()->Unit
 ){
-    ScaffoldTopAppbar(title = "Profile", onNavigationIconClick = onPopBack) {
+    ScaffoldTopAppbar(
+        title = "Profile",
+        onNavigationIconClick = onBackBtnClick
+    ) {
         val modifier = Modifier.padding(it)
-        FullScreenLoading(
-            isLoading = uiState.isLoading,
-            loadingContent = { CircularProgressBar() },
-            content = {
-                when(uiState){
-                    is ProfileUiState.Error -> error(uiState.error)
-                    is ProfileUiState.Success -> success(uiState.profileEntity,modifier)
+        Box(
+            modifier = modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ){
+            when(profileUiState){
+                is ProfileUiState.Error -> NetworkErrorMessage(message = profileUiState.message){
+                    onRefreshProfile(ProfileUiAction.FetchProfile)
                 }
+                ProfileUiState.Loading -> CircularProgressIndicator()
+                is ProfileUiState.Success -> ProfileContentView(data = profileUiState.data)
             }
-        )
+        }
     }
-
-}
-
-@Composable
-private fun FullScreenLoading(
-    isLoading:Boolean,
-    loadingContent: @Composable () -> Unit,
-    content: @Composable () -> Unit,
-){
-    if (isLoading) loadingContent()
-    else content()
 }
 
 @Composable
 private fun ProfileContentView(
+    data: ProfileEntity,
     modifier: Modifier = Modifier,
-    entity: ProfileEntity
 ){
     Column(
         modifier = modifier
             .padding(16.dp)
             .background(Color.White)
-            .fillMaxWidth(),
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter =  rememberAsyncImagePainter(model = entity.userAvatar),
+            painter =  rememberAsyncImagePainter(model = data.userAvatar),
             contentDescription = "",
             modifier = modifier
                 .size(80.dp)
@@ -96,10 +84,10 @@ private fun ProfileContentView(
         )
 
         Spacer(modifier = modifier.height(16.dp))
-        Text(text = entity.userFullName, fontSize = 16.sp, fontWeight = FontWeight.Bold)
-        Text(text = entity.userName)
+        Text(text = data.userFullName, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+        Text(text = data.userName)
         Spacer(modifier = modifier.height(16.dp))
-        Text(text = entity.about)
+        Text(text = data.about)
 
         Spacer(modifier = modifier.height(8.dp))
         Spacer(modifier = modifier
@@ -113,7 +101,7 @@ private fun ProfileContentView(
                 modifier = modifier.weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = entity.repoCount.toString(), fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Text(text = data.repoCount.toString(), fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Text(text = "Repository")
             }
 
@@ -121,7 +109,7 @@ private fun ProfileContentView(
                 modifier = modifier.weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = entity.followerCount.toString(), fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Text(text = data.followerCount.toString(), fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Text(text = "Follower")
             }
 
@@ -130,7 +118,7 @@ private fun ProfileContentView(
                 modifier = modifier.weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = entity.followingCount.toString(), fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Text(text = data.followingCount.toString(), fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Text(text = "Following")
             }
         }

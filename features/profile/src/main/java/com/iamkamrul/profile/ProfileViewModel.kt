@@ -14,23 +14,11 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val profileUseCase: ProfileUseCase
 ): ViewModel(){
-    val action:(ProfileUiAction)->Unit
+    private val _profileUiState = MutableStateFlow<ProfileUiState>(ProfileUiState.Loading)
+    val profileUiState get() = _profileUiState.asStateFlow()
 
-    private val viewModelState = MutableStateFlow(ProfileViewModelState(isLoading = true))
-    val uiState = viewModelState
-        .map(ProfileViewModelState::toUiState)
-        .stateIn(
-            viewModelScope,
-            SharingStarted.Eagerly,
-            viewModelState.value.toUiState()
-        )
 
     init {
-        action = {
-            when(it){
-                ProfileUiAction.FetchProfile -> fetchProfile()
-            }
-        }
         fetchProfile()
     }
 
@@ -38,47 +26,29 @@ class ProfileViewModel @Inject constructor(
         viewModelScope.launch {
             profileUseCase.execute(ProfileUseCase.Params(userName = "kamrul3288")).collect{ response->
                 when(response){
-                    is Result.Error -> viewModelState.update {
-                        it.copy(error = response.message)
-                    }
-                    is Result.Loading -> viewModelState.update {
-                        it.copy(error = "", isLoading = response.loading)
-                    }
-                    is Result.Success -> viewModelState.update {
-                        it.copy(profileEntity = response.data)
-                    }
+                    is Result.Error -> _profileUiState.value = ProfileUiState.Error(response.message)
+                    Result.Loading -> _profileUiState.value = ProfileUiState.Loading
+                    is Result.Success -> _profileUiState.value = ProfileUiState.Success(response.data)
                 }
             }
         }
     }
+
+    fun handleAction(action: ProfileUiAction){
+        when(action){
+            ProfileUiAction.FetchProfile -> fetchProfile()
+        }
+    }
 }
 
-private data class ProfileViewModelState(
-    val isLoading:Boolean = false,
-    val error:String = "",
-    val profileEntity:ProfileEntity? = null
-){
-    fun toUiState():ProfileUiState =
-        if (profileEntity != null) ProfileUiState.Success(isLoading = isLoading, error = error, profileEntity = profileEntity)
-        else ProfileUiState.Error(isLoading = isLoading, error = error)
-}
+
 
 sealed interface ProfileUiState{
-    val isLoading:Boolean
-    val error:String
-
-    data class Success(
-        val profileEntity:ProfileEntity,
-        override val isLoading: Boolean,
-        override val error: String
-    ):ProfileUiState
-
-    data class Error(
-        override val isLoading: Boolean,
-        override val error: String
-    ):ProfileUiState
+    data object Loading : ProfileUiState
+    data class Success(val data:ProfileEntity): ProfileUiState
+    data class Error(val message:String) : ProfileUiState
 }
 
-sealed class ProfileUiAction{
-    object FetchProfile:ProfileUiAction()
+sealed interface ProfileUiAction{
+    data object FetchProfile:ProfileUiAction
 }

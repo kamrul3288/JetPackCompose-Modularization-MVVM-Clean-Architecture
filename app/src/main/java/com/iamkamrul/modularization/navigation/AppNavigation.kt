@@ -5,6 +5,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.iamkamrul.profile.navigateToProfileScreen
+import com.iamkamrul.profile.profileScreen
 import com.iamkamrul.repolist.repoListScreen
 import com.iamkamrul.repolist.repoListScreenRoute
 
@@ -19,8 +21,7 @@ fun AppNavigation(
         startDestination = startDestination,
         modifier = modifier
     ) {
-        repoListScreen(
-            onRepoItemClick = {}
-        )
+        repoListScreen(onRepoItemClick = navController::navigateToProfileScreen)
+        profileScreen(onBackBtnClick = navController::popBackStack)
     }
 }

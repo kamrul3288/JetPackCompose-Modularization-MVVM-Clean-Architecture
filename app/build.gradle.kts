@@ -53,7 +53,7 @@ dependencies {
     implementation(projects.core.designsystem)
 
     implementation(projects.features.repolist)
-    //implementation(projects.features.profile)
+    implementation(projects.features.profile)
 
     implementation(libs.androidx.compose.activity)
     implementation(libs.androidx.compose.navigation)
