@@ -1,4 +1,3 @@
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.iamkamrul.android.application)
     alias(libs.plugins.iamkamrul.android.hilt)
