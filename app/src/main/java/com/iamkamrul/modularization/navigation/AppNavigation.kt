@@ -2,6 +2,8 @@ package com.iamkamrul.modularization.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.Lifecycle
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
@@ -22,6 +24,12 @@ fun AppNavigation(
         modifier = modifier
     ) {
         repoListScreen(onRepoItemClick = navController::navigateToProfileScreen)
-        profileScreen(onBackBtnClick = navController::popBackStack)
+        profileScreen(onBackBtnClick = navController::popBackStackOrIgnore)
+    }
+}
+
+fun NavController.popBackStackOrIgnore() {
+    if (currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
+        popBackStack()
     }
 }
