@@ -21,6 +21,7 @@ import androidx.compose.material.icons.outlined.ForkRight
 import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.StarBorder
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -104,7 +105,8 @@ private fun RepoListItem(
 ){
     Card(
         modifier = modifier.padding(bottom = 10.dp).clickable { onItemClick()},
-        shape = RectangleShape
+        shape = RectangleShape,
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.color.white)
     ) {
         Column(
             modifier = modifier.padding(16.dp).fillMaxWidth()
