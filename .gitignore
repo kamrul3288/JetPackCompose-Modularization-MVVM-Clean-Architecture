@@ -1,12 +1,7 @@
 *.iml
 .gradle
 /local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+.idea/
 .DS_Store
 /build
 /captures
@@ -80,9 +75,3 @@ lint/intermediates/
 lint/generated/
 lint/outputs/
 lint/tmp/
-# lint/reports/
-
-/.idea/compiler.xml
-/.idea/deploymentTargetDropDown.xml
-/.idea/gradle.xml
-#git rm --cached .idea/gradle.xml
