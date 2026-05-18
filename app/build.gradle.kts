@@ -17,7 +17,7 @@ android {
     }
 
     buildTypes {
-        debug {
+        release {
             isMinifyEnabled = false
             isShrinkResources = false
             proguardFiles(
@@ -34,15 +34,18 @@ android {
             )
         }
     }
-    buildFeatures{
+
+    buildFeatures {
         buildConfig = true
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
 }
+
 dependencies {
     implementation(projects.core.di)
     implementation(projects.core.domain)
@@ -57,12 +60,12 @@ dependencies {
     implementation(libs.androidx.compose.activity)
     implementation(libs.androidx.compose.navigation)
     implementation(libs.androidx.compose.hilt.navigation)
-    implementation(libs.androidx.lifecycle.runtimeCompose)
-    implementation(libs.androidx.lifecycle.viewModelCompose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
-    testImplementation(libs.test.junit)
-    androidTestImplementation(libs.test.extjunit)
-    androidTestImplementation(libs.test.espresso)
-    androidTestImplementation(libs.test.compose.ui.junit)
-    debugImplementation(libs.androidx.compose.ui.manifest)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 }

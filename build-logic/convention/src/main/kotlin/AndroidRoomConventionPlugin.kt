@@ -14,27 +14,21 @@ class AndroidRoomConventionPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         with(target) {
-            pluginManager.apply("com.google.devtools.ksp")
+            pluginManager.apply(libs.findPlugin("google-ksp").get().get().pluginId)
 
             extensions.configure<KspExtension> {
-                // The schemas directory contains a schema file for each version of the Room database.
-                // This is required to enable Room auto migrations.
-                // See https://developer.android.com/reference/kotlin/androidx/room/AutoMigration.
-               // arg(RoomSchemaArgProvider(File(projectDir, "schemas")))
+                arg(RoomSchemaArgProvider(File(projectDir, "schemas")))
             }
 
             dependencies {
-                add("implementation", libs.findLibrary("room.runtime").get())
-                add("implementation", libs.findLibrary("room.ktx").get())
-                add("ksp", libs.findLibrary("room.compiler").get())
+                add("implementation", libs.findLibrary("room-runtime").get())
+                add("implementation", libs.findLibrary("room-ktx").get())
+                add("ksp", libs.findLibrary("room-compiler").get())
             }
         }
     }
 
-    /**
-     * https://issuetracker.google.com/issues/132245929
-     * [Export schemas](https://developer.android.com/training/data-storage/room/migrating-db-versions#export-schemas)
-     */
+    // https://developer.android.com/training/data-storage/room/migrating-db-versions#export-schemas
     class RoomSchemaArgProvider(
         @get:InputDirectory
         @get:PathSensitive(PathSensitivity.RELATIVE)

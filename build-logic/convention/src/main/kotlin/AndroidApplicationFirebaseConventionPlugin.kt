@@ -1,8 +1,6 @@
-import com.android.build.api.dsl.ApplicationExtension
 import com.iamkamrul.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 
 class AndroidApplicationFirebaseConventionPlugin : Plugin<Project> {
@@ -16,9 +14,9 @@ class AndroidApplicationFirebaseConventionPlugin : Plugin<Project> {
             dependencies {
                 val bom = libs.findLibrary("firebase-bom").get()
                 add("implementation", platform(bom))
-                "implementation"(libs.findLibrary("firebase.messaging").get())
-                "implementation"(libs.findLibrary("firebase.analytics").get())
-                "implementation"(libs.findLibrary("firebase.crashlytics").get())
+                add("implementation", libs.findLibrary("firebase-messaging").get())
+                add("implementation", libs.findLibrary("firebase-analytics").get())
+                add("implementation", libs.findLibrary("firebase-crashlytics").get())
             }
         }
     }

@@ -7,14 +7,13 @@ import org.gradle.kotlin.dsl.configure
 
 class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        with(target){
+        with(target) {
             pluginManager.apply(libs.findPlugin("android-application").get().get().pluginId)
             pluginManager.apply(libs.findPlugin("kotlin-compose").get().get().pluginId)
 
-            // Configure the Android application extension
-            extensions.configure<ApplicationExtension>{
+            extensions.configure<ApplicationExtension> {
                 configureAndroidCompose(this)
-                defaultConfig.targetSdk = libs.findVersion("androidSdkVersion").get().toString().toInt()
+                defaultConfig.targetSdk = libs.findVersion("android-compile-sdk").get().toString().toInt()
             }
         }
     }

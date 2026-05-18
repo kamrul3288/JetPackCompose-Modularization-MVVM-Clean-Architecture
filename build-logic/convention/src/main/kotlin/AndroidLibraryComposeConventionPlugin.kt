@@ -1,4 +1,3 @@
-
 import com.android.build.api.dsl.LibraryExtension
 import com.iamkamrul.configureAndroidCompose
 import com.iamkamrul.libs
@@ -17,7 +16,7 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
             configureAndroidCompose(extension)
 
             dependencies {
-                add("debugImplementation",libs.findLibrary("androidx-compose-ui-manifest").get())
+                add("debugImplementation", libs.findLibrary("androidx-compose-ui-test-manifest").get())
             }
         }
     }

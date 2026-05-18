@@ -1,4 +1,3 @@
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.iamkamrul.android.library)
     alias(libs.plugins.iamkamrul.android.hilt)
@@ -10,6 +9,6 @@ android {
 
 dependencies {
     api(projects.model.entity)
-    implementation(libs.androidx.corektx)
+    implementation(libs.androidx.core.ktx)
     implementation(libs.kotlinx.coroutines.android)
 }

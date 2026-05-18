@@ -1,11 +1,9 @@
-
 import com.android.build.api.dsl.LibraryExtension
 import com.iamkamrul.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.kotlin
 
 class AndroidFeatureComposeConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -15,6 +13,7 @@ class AndroidFeatureComposeConventionPlugin : Plugin<Project> {
                 apply("iamkamrul.android.library.compose")
                 apply("iamkamrul.android.hilt")
             }
+
             extensions.configure<LibraryExtension> {
                 defaultConfig {
                     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -28,19 +27,15 @@ class AndroidFeatureComposeConventionPlugin : Plugin<Project> {
                 add("implementation", project(":core:designsystem"))
                 add("implementation", project(":core:ui"))
 
+                add("implementation", libs.findLibrary("androidx-compose-hilt-navigation").get())
+                add("implementation", libs.findLibrary("androidx-lifecycle-runtime-compose").get())
+                add("implementation", libs.findLibrary("androidx-lifecycle-viewmodel-compose").get())
+                add("implementation", libs.findLibrary("timber").get())
+                add("implementation", libs.findLibrary("kotlinx-coroutines-android").get())
 
-
-                add("implementation", libs.findLibrary("androidx.compose.hilt.navigation").get())
-                add("implementation", libs.findLibrary("androidx.lifecycle.runtimeCompose").get())
-                add("implementation", libs.findLibrary("androidx.lifecycle.viewModelCompose").get())
-                add("implementation", libs.findLibrary("log.timber").get())
-                add("implementation", libs.findLibrary("kotlinx.coroutines.android").get())
-
-
-                add("testImplementation", libs.findLibrary("test-junit").get())
-                add("androidTestImplementation", libs.findLibrary("test.extjunit").get())
-                add("androidTestImplementation", libs.findLibrary("test.espresso").get())
-
+                add("testImplementation", libs.findLibrary("junit").get())
+                add("androidTestImplementation", libs.findLibrary("androidx-test-ext-junit").get())
+                add("androidTestImplementation", libs.findLibrary("androidx-test-espresso-core").get())
             }
         }
     }

@@ -3,77 +3,109 @@ agp = "9.2.1"
 kotlin = "2.3.21"
 ksp = "2.3.8"
 hilt = "2.59.2"
-androidSdkVersion = "37"
-minSdkVersion = "23"
 
-composeActivity = "1.13.0"
-composeBom = "2026.05.00"
-composeNavigation = "2.9.8"
-composeHiltNavigation = "1.3.0"
-androidxCoreKtx = "1.18.0"
-lifecycle = "2.10.0"
+android-compile-sdk = "37"
+android-min-sdk = "23"
+
+compose-activity = "1.13.0"
+compose-bom = "2026.05.00"
+compose-navigation = "2.9.8"
+compose-hilt-navigation = "1.3.0"
+
+androidx-core-ktx = "1.18.0"
+androidx-lifecycle = "2.10.0"
+
 retrofit2 = "3.0.0"
-okhHttp3 = "5.3.2"
+okhttp3 = "5.3.2"
 gson = "2.14.0"
-timber = "5.0.1"
+
 coil = "2.7.0"
-desugar = "2.1.5"
-kotlinxCoroutines = "1.11.0"
+timber = "5.0.1"
+desugar-jdk = "2.1.5"
+kotlinx-coroutines = "1.11.0"
+
+room = "2.8.4"
+firebase-bom = "34.13.0"
+
 junit = "4.13.2"
-extjunit = "1.3.0"
-espresso = "3.7.0"
+androidx-test-ext = "1.3.0"
+androidx-test-espresso = "3.7.0"
 
 [bundles]
-network = ["retrofit2.core","retrofit2.rx3adapter","retrofit2.gsonconverter","gson","okhHttp3.core","okhHttp3.interceptor","kotlinx-coroutines-android"]
+network = [
+    "retrofit2-core",
+    "retrofit2-adapter-rxjava3",
+    "retrofit2-converter-gson",
+    "gson",
+    "okhttp3",
+    "okhttp3-logging-interceptor",
+    "kotlinx-coroutines-android",
+]
 
 [libraries]
-androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
-androidx-compose-ui = { group = "androidx.compose.ui", name = "ui"}
-androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
-androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
-androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-androidx-compose-ui-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
-androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
-androidx-compose-material-iconsExtended= { group = "androidx.compose.material", name = "material-icons-extended"}
-androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation"}
-androidx-compose-activity = {group = "androidx.activity", name="activity-compose", version.ref="composeActivity"}
-androidx-compose-navigation = {group = "androidx.navigation", name="navigation-compose", version.ref="composeNavigation"}
-androidx-compose-hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "composeHiltNavigation" }
-androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle" }
-androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
-
-
+# Build plugins (consumed only by build-logic)
 gradle-plugin-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 gradle-plugin-compose = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 gradle-plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 gradle-plugin-ksp = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 
+# Core
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidx-core-ktx" }
+android-desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar-jdk" }
 
-androidx-corektx = {group = "androidx.core", name = "core-ktx", version.ref="androidxCoreKtx"}
+# Compose
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
+androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+androidx-compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "compose-activity" }
+androidx-compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "compose-navigation" }
+androidx-compose-hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "compose-hilt-navigation" }
 
+# Lifecycle
+androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 
+# Dependency Injection
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 
+# Network
+retrofit2-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit2" }
+retrofit2-adapter-rxjava3 = { group = "com.squareup.retrofit2", name = "adapter-rxjava3", version.ref = "retrofit2" }
+retrofit2-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit2" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp3" }
+okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp3" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 
-hilt-android = {group = "com.google.dagger", name = "hilt-android", version.ref="hilt"}
-hilt-compiler = {group = "com.google.dagger", name = "hilt-android-compiler", version.ref="hilt"}
-android-desugarJdkLibs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar" }
+# Database
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 
-retrofit2-core = {group = "com.squareup.retrofit2", name = "retrofit", version.ref="retrofit2"}
-retrofit2-rx3adapter = {group = "com.squareup.retrofit2", name = "adapter-rxjava3", version.ref="retrofit2"}
-retrofit2-gsonconverter = {group = "com.squareup.retrofit2", name = "converter-gson", version.ref="retrofit2"}
-gson = {group = "com.google.code.gson", name = "gson", version.ref="gson"}
-okhHttp3-core = {group = "com.squareup.okhttp3", name = "okhttp", version.ref="okhHttp3"}
-okhHttp3-interceptor = {group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref="okhHttp3"}
+# Firebase (update firebase-bom version to latest before enabling this plugin)
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
 
-kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
-image-coil-compose = {group = "io.coil-kt", name = "coil-compose", version.ref="coil"}
-log-timber = {group = "com.jakewharton.timber", name = "timber", version.ref="timber"}
+# Image Loading
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
+# Logging
+timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 
-test-junit = {group = "junit", name = "junit", version.ref="junit"}
-test-extjunit = {group = "androidx.test.ext", name = "junit", version.ref="extjunit"}
-test-espresso = {group = "androidx.test.espresso", name = "espresso-core", version.ref="espresso"}
-test-compose-ui-junit = { group = "androidx.compose.ui", name = "ui-test-junit4"}
+# Testing
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext" }
+androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidx-test-espresso" }
 
 [plugins]
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
@@ -83,8 +115,7 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 google-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
-
-# Plugins defined by this project
+# Convention plugins defined by this project
 iamkamrul-android-application = { id = "iamkamrul.android.application", version = "unspecified" }
 iamkamrul-android-application-compose = { id = "iamkamrul.android.application.compose", version = "unspecified" }
 iamkamrul-android-hilt = { id = "iamkamrul.android.hilt", version = "unspecified" }
@@ -93,4 +124,3 @@ iamkamrul-android-library-compose = { id = "iamkamrul.android.library.compose", 
 iamkamrul-android-feature-compose = { id = "iamkamrul.android.feature.compose", version = "unspecified" }
 iamkamrul-android-retrofit = { id = "iamkamrul.android.retrofit", version = "unspecified" }
 iamkamrul-jvm-library = { id = "iamkamrul.jvm.library", version = "unspecified" }
-
