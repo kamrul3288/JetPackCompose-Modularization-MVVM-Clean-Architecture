@@ -1,5 +1,5 @@
 
-import com.android.build.gradle.LibraryExtension
+import com.android.build.api.dsl.LibraryExtension
 import com.iamkamrul.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -34,7 +34,6 @@ class AndroidFeatureComposeConventionPlugin : Plugin<Project> {
                 add("implementation", libs.findLibrary("androidx.lifecycle.runtimeCompose").get())
                 add("implementation", libs.findLibrary("androidx.lifecycle.viewModelCompose").get())
                 add("implementation", libs.findLibrary("log.timber").get())
-                add("implementation", libs.findLibrary("kamrul3288.dateced").get())
                 add("implementation", libs.findLibrary("kotlinx.coroutines.android").get())
 
 
