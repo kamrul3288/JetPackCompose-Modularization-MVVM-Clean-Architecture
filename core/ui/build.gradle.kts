@@ -9,6 +9,7 @@ android {
 
 dependencies {
     implementation(projects.core.designsystem)
+    implementation(projects.core.domain)
 
     api(libs.androidx.core.ktx)
     api(libs.androidx.compose.foundation)

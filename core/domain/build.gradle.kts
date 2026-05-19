@@ -1,14 +1,9 @@
 plugins {
-    alias(libs.plugins.iamkamrul.android.library)
-    alias(libs.plugins.iamkamrul.android.hilt)
+    alias(libs.plugins.iamkamrul.jvm.library)
 }
 
-android {
-    namespace = "com.iamkamrul.domain"
-}
 
 dependencies {
-    api(projects.model.entity)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.javax.inject)
 }

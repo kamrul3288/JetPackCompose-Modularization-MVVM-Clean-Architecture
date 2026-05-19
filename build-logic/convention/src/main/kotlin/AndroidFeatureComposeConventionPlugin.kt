@@ -12,6 +12,7 @@ class AndroidFeatureComposeConventionPlugin : Plugin<Project> {
                 apply("iamkamrul.android.library")
                 apply("iamkamrul.android.library.compose")
                 apply("iamkamrul.android.hilt")
+                apply(libs.findPlugin("kotlinx-serialization").get().get().pluginId)
             }
 
             extensions.configure<LibraryExtension> {
@@ -29,13 +30,20 @@ class AndroidFeatureComposeConventionPlugin : Plugin<Project> {
 
                 add("implementation", libs.findLibrary("androidx-compose-hilt-navigation").get())
                 add("implementation", libs.findLibrary("androidx-lifecycle-runtime-compose").get())
-                add("implementation", libs.findLibrary("androidx-lifecycle-viewmodel-compose").get())
+                add(
+                    "implementation",
+                    libs.findLibrary("androidx-lifecycle-viewmodel-compose").get()
+                )
                 add("implementation", libs.findLibrary("timber").get())
                 add("implementation", libs.findLibrary("kotlinx-coroutines-android").get())
 
                 add("testImplementation", libs.findLibrary("junit").get())
                 add("androidTestImplementation", libs.findLibrary("androidx-test-ext-junit").get())
-                add("androidTestImplementation", libs.findLibrary("androidx-test-espresso-core").get())
+                add(
+                    "androidTestImplementation",
+                    libs.findLibrary("androidx-test-espresso-core").get()
+                )
+                add("implementation", libs.findLibrary("kotlinx-serialization-json").get())
             }
         }
     }

@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.iamkamrul.android.library)
     alias(libs.plugins.iamkamrul.android.hilt)
-    alias(libs.plugins.iamkamrul.android.retrofit)
 }
 
 android {
@@ -9,6 +8,5 @@ android {
 }
 
 dependencies {
-    api(libs.timber)
-    api(libs.bundles.network)
+    implementation(libs.kotlinx.coroutines.android)
 }

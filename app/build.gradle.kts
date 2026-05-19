@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.iamkamrul.android.application)
     alias(libs.plugins.iamkamrul.android.hilt)
     alias(libs.plugins.iamkamrul.android.application.compose)
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 android {
@@ -50,6 +51,7 @@ dependencies {
     implementation(projects.core.di)
     implementation(projects.core.domain)
     implementation(projects.core.data)
+    implementation(libs.timber)
     implementation(projects.common)
     implementation(projects.core.ui)
     implementation(projects.core.designsystem)
@@ -62,6 +64,7 @@ dependencies {
     implementation(libs.androidx.compose.hilt.navigation)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.kotlinx.serialization.json)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

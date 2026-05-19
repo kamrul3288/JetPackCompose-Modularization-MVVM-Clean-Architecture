@@ -8,7 +8,6 @@ class AndroidRetrofitConventionPlugin : Plugin<Project> {
         with(target) {
             dependencies {
                 add("implementation", libs.findLibrary("retrofit2-core").get())
-                add("implementation", libs.findLibrary("retrofit2-adapter-rxjava3").get())
                 add("implementation", libs.findLibrary("retrofit2-converter-gson").get())
                 add("implementation", libs.findLibrary("gson").get())
                 add("implementation", libs.findLibrary("okhttp3").get())
