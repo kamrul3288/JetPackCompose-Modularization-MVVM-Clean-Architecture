@@ -1,21 +1,20 @@
 package com.iamkamrul.profile
 
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import kotlinx.serialization.Serializable
 
-const val profileScreenRoute = "profileScreenRoute"
 
-fun NavController.navigateToProfileScreen(){
-    navigate(profileScreenRoute)
-}
+@Serializable
+data object ProfileRoute
+
 
 fun NavGraphBuilder.profileScreen(
-    onBackBtnClick:()->Unit
-){
-    composable(route = profileScreenRoute){
+    onBackClick: () -> Unit
+) {
+    composable<ProfileRoute> {
         ProfileScreenRoute(
-            onBackBtnClick = onBackBtnClick
+            onBackClick = onBackClick
         )
     }
 }
