@@ -2,7 +2,7 @@ package com.iamkamrul.designsystem.component
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -27,7 +27,7 @@ fun ScaffoldTopAppbar(
     contentColor: Color = contentColorFor(containerColor),
     title:String,
     onNavigationIconClick:()->Unit,
-    navigationIcon: Painter = rememberVectorPainter(image = Icons.Outlined.ArrowBack),
+    navigationIcon: Painter = rememberVectorPainter(image = Icons.AutoMirrored.Outlined.ArrowBack),
     snackbarHost: @Composable () -> Unit = {},
     bottomBar: @Composable () -> Unit = {},
     content: @Composable (PaddingValues) -> Unit,
