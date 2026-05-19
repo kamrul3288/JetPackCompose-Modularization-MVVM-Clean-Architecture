@@ -8,9 +8,8 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-class BaseUrlModule{
+class BaseUrlModule {
     @Provides
     @AppBaseUrl
-    fun provideBaseUrl():String = ""
+    fun provideBaseUrl(): String = "https://api.github.com/"
 }
-
