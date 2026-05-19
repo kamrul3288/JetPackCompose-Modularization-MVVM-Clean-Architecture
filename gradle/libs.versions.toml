@@ -3,6 +3,7 @@ agp = "9.2.1"
 kotlin = "2.3.21"
 ksp = "2.3.8"
 hilt = "2.59.2"
+javaxInject = "1"
 
 android-compile-sdk = "37"
 android-min-sdk = "23"
@@ -23,7 +24,7 @@ coil = "2.7.0"
 timber = "5.0.1"
 desugar-jdk = "2.1.5"
 kotlinx-coroutines = "1.11.0"
-
+kotlinx-serialization-json = "1.11.0"
 room = "2.8.4"
 firebase-bom = "34.13.0"
 
@@ -34,7 +35,6 @@ androidx-test-espresso = "3.7.0"
 [bundles]
 network = [
     "retrofit2-core",
-    "retrofit2-adapter-rxjava3",
     "retrofit2-converter-gson",
     "gson",
     "okhttp3",
@@ -83,7 +83,11 @@ retrofit2-converter-gson = { group = "com.squareup.retrofit2", name = "converter
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp3" }
 okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp3" }
+
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+javax-inject = { module = "javax.inject:javax.inject", version.ref = "javaxInject" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 
 # Database
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
@@ -109,7 +113,7 @@ androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espres
 
 [plugins]
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 google-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
