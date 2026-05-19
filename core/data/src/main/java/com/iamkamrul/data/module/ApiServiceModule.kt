@@ -1,6 +1,5 @@
 package com.iamkamrul.data.module
 
-
 import com.iamkamrul.data.apiservice.ApiService
 import com.iamkamrul.di.qualifier.AppBaseUrl
 import dagger.Module
