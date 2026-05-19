@@ -1,7 +1,7 @@
 package com.iamkamrul.data.apiservice
 
-import com.iamkamrul.apiresponse.ProfileApiResponse
-import com.iamkamrul.apiresponse.RepoItemApiResponse
+import com.iamkamrul.data.dto.ProfileApiResponse
+import com.iamkamrul.data.dto.RepoItemApiResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
