@@ -1,4 +1,4 @@
-package com.iamkamrul.ui.component
+package com.iamkamrul.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,11 +20,11 @@ import androidx.compose.ui.unit.dp
 import com.iamkamrul.designsystem.theme.color
 
 @Composable
-fun  NetworkErrorMessage(
-    message:String,
+fun NetworkErrorMessage(
+    message: String,
     modifier: Modifier = Modifier,
-    onClickRefresh:()->Unit
-){
+    onClickRefresh: () -> Unit
+) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -34,10 +34,16 @@ fun  NetworkErrorMessage(
             .padding(16.dp)
     ) {
 
-        Text(text = message, style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
+        Text(
+            text = message,
+            style = MaterialTheme.typography.titleLarge,
+            textAlign = TextAlign.Center
+        )
         Spacer(modifier = modifier.height(32.dp))
         Button(
-            modifier = modifier.fillMaxWidth().height(50.dp),
+            modifier = modifier
+                .fillMaxWidth()
+                .height(50.dp),
             onClick = onClickRefresh,
             shape = RoundedCornerShape(10.dp)
         ) {

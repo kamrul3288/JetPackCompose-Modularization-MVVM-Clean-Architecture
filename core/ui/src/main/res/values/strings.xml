@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_no_internet">No internet connection. Please check your network.</string>
+    <string name="error_timeout">Connection timed out. Please try again.</string>
+    <string name="error_unknown_host">Cannot reach server. Please check your connection.</string>
+    <string name="error_ssl">Secure connection failed.</string>
+    <string name="error_bad_request">Invalid request. Please review your input.</string>
+    <string name="error_unauthorized">Your session has expired. Please sign in again.</string>
+    <string name="error_forbidden">You don\'t have permission to do this.</string>
+    <string name="error_not_found">The requested resource was not found.</string>
+    <string name="error_rate_limit">Too many requests. Please wait a moment.</string>
+    <string name="error_server">Server error (%1$d). Please try again later.</string>
+    <string name="error_connection_shutdown">Connection was unexpectedly closed.</string>
+    <string name="error_conflict">Conflict detected. Please refresh and try again.</string>
+    <string name="error_unknown">An unknown error occurred. Please try again.</string>
+    <string name="error_parsing">Error parsing response. Please try again.</string>
+    <string name="error_disk_full">Storage is full. Please free up space and try again.</string>
+    <string name="error_empty_response">Received empty response from server.</string>
+</resources>
